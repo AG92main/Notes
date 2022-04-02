@@ -14,12 +14,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        guard let windowScene = (scene as? UIWindowScene) else {return}
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = ViewController()
-        window.makeKeyAndVisible()
-        self.window = window
-    }
+            print("Scene willConnectTo.")
+
+            // Force convert UIScene type variable to UIWindowScene type variable.
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+            // Create the UIWindow variable use above UIWindowScene variable.
+            self.window = UIWindow(windowScene: windowScene)
+
+            // Set this scene's window's background color.
+            self.window!.backgroundColor = UIColor.red
+
+            // Create a ViewController object and set it as the scene's window's root view controller.
+            self.window!.rootViewController = ViewController()
+
+            // Make this scene's window be visible.
+            self.window!.makeKeyAndVisible()
+        }
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -45,4 +56,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 }
-
