@@ -29,8 +29,45 @@ class ViewController: UIViewController {
         titleVeiw.translatesAutoresizingMaskIntoConstraints = false
         titleVeiw.text = "Заметка"
         titleVeiw.font = .boldSystemFont(ofSize: 22)
-
-            }
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(
+                item: titleVeiw,
+                attribute: .height,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .notAnAttribute,
+                multiplier: 1,
+                constant: 250
+),
+            NSLayoutConstraint(
+                item: titleVeiw,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .notAnAttribute,
+                multiplier: 1,
+                constant: 250
+            ),
+            NSLayoutConstraint(
+                item: titleVeiw,
+                attribute: .top,
+                relatedBy: .equal,
+                toItem: view,
+                attribute: .top,
+                multiplier: 1,
+                constant: 150
+            ),
+            NSLayoutConstraint(
+                item: titleVeiw,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: view,
+                attribute: .centerX,
+                multiplier: 1,
+                constant: 0
+            )
+        ])
+    }
 
     private func setupMainTextView() {
         view.addSubview(mainTextView)
