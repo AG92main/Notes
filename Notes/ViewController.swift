@@ -15,6 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupRightBarButton()
+        setupTitleView()
         setupMainTextView()
         mainTextView.becomeFirstResponder()
     }
@@ -23,30 +24,19 @@ class ViewController: UIViewController {
         rightBarButton.target = self
         navigationItem.rightBarButtonItem = rightBarButton
     }
-    private func titleView() {
+    private func setupTitleView() {
         view.addSubview(titleVeiw)
         titleVeiw.translatesAutoresizingMaskIntoConstraints = false
         titleVeiw.text = "Заметка"
         titleVeiw.font = .boldSystemFont(ofSize: 22)
-        titleVeiw.trailingAnchor.constraint(
-            lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor,
-            constant: -20
-        ).isActive = true
-    }
+
+            }
 
     private func setupMainTextView() {
         view.addSubview(mainTextView)
         mainTextView.translatesAutoresizingMaskIntoConstraints = false
+        mainTextView.isUserInteractionEnabled = true
         mainTextView.text = "Текст Заметки"
         mainTextView.font = .systemFont(ofSize: 14)
-        mainTextView.leadingAnchor.constraint(
-            equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-            constant: 20
-        ).isActive = true
-        mainTextView.trailingAnchor.constraint(
-            equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-            constant: -20
-        ).isActive = true
-        mainTextView.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
 }
