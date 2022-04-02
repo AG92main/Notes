@@ -14,22 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-            print("Scene willConnectTo.")
-
-            // Force convert UIScene type variable to UIWindowScene type variable.
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-
-            // Create the UIWindow variable use above UIWindowScene variable.
-            self.window = UIWindow(windowScene: windowScene)
-
-            // Set this scene's window's background color.
-            self.window!.backgroundColor = UIColor.red
-
-            // Create a ViewController object and set it as the scene's window's root view controller.
-            self.window!.rootViewController = ViewController()
-
-            // Make this scene's window be visible.
-            self.window!.makeKeyAndVisible()
+        if let windowScene = scene as? UIWindowScene {
+            let myWindow = UIWindow(windowScene: windowScene)
+            let navContr = UINavigationController()
+            let mViewController = ViewController()
+            navContr.viewControllers = [mViewController]
+            myWindow.rootViewController = navContr
+            self.window = myWindow
+            myWindow.makeKeyAndVisible()
+        }
         }
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
