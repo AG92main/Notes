@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,15 +14,54 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYq-AO-oUw">
+                                <rect key="frame" x="75" y="296" width="265" height="305"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="GKb-AQ-jjq" userLabel="Logo">
+                                        <rect key="frame" x="10" y="59.5" width="245" height="225"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Заметка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAP-ap-TsX" userLabel="Заметки">
+                                        <rect key="frame" x="103.5" y="292.5" width="66.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="kAP-ap-TsX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MYq-AO-oUw" secondAttribute="leading" id="3Ee-J6-dmr"/>
+                                    <constraint firstItem="GKb-AQ-jjq" firstAttribute="top" secondItem="MYq-AO-oUw" secondAttribute="top" constant="59.5" id="8dk-zQ-OoC"/>
+                                    <constraint firstAttribute="trailing" secondItem="GKb-AQ-jjq" secondAttribute="trailing" constant="10" id="FZt-8e-cFH"/>
+                                    <constraint firstAttribute="bottom" secondItem="kAP-ap-TsX" secondAttribute="bottom" constant="-8" id="MGD-0h-Uo3"/>
+                                    <constraint firstAttribute="trailing" secondItem="kAP-ap-TsX" secondAttribute="trailing" constant="95" id="brd-97-lbU"/>
+                                    <constraint firstItem="kAP-ap-TsX" firstAttribute="top" secondItem="GKb-AQ-jjq" secondAttribute="bottom" constant="8" symbolic="YES" id="lXI-mB-RKb"/>
+                                    <constraint firstItem="GKb-AQ-jjq" firstAttribute="leading" secondItem="MYq-AO-oUw" secondAttribute="leading" constant="10" id="zBb-EW-9mi"/>
+                                    <constraint firstItem="kAP-ap-TsX" firstAttribute="top" secondItem="GKb-AQ-jjq" secondAttribute="bottom" constant="8" symbolic="YES" id="zxp-4h-v1S"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MYq-AO-oUw" secondAttribute="trailing" constant="74" id="9FP-d0-V8x"/>
+                            <constraint firstItem="MYq-AO-oUw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="DRl-9s-2Wa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MYq-AO-oUw" secondAttribute="bottom" constant="261" id="IgO-Ut-E4R"/>
+                            <constraint firstItem="MYq-AO-oUw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="252" id="yaq-3n-Y8X"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iTunesArtwork" width="225" height="225"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
