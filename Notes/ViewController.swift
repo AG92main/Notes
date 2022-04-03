@@ -11,9 +11,10 @@ class ViewController: UIViewController {
     private var rightBarButton = UIBarButtonItem()
     private var titleVeiw = UITextField()
     private var mainTextView = UITextView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupRightBarButton()
         setupTitleView()
         setupMainTextView()
@@ -23,57 +24,39 @@ class ViewController: UIViewController {
         rightBarButton.title = "Готово"
         rightBarButton.target = self
         navigationItem.rightBarButtonItem = rightBarButton
+        view.endEditing(true)
     }
     private func setupTitleView() {
         view.addSubview(titleVeiw)
         titleVeiw.translatesAutoresizingMaskIntoConstraints = false
-        titleVeiw.text = "Заметка"
+        titleVeiw.text = ""
+        titleVeiw.placeholder = "Заголовок"
+        titleVeiw.borderStyle = .none
         titleVeiw.font = .boldSystemFont(ofSize: 22)
-        NSLayoutConstraint.activate([
-            NSLayoutConstraint(
-                item: titleVeiw,
-                attribute: .height,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 250
-),
-            NSLayoutConstraint(
-                item: titleVeiw,
-                attribute: .width,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 250
-            ),
-            NSLayoutConstraint(
-                item: titleVeiw,
-                attribute: .top,
-                relatedBy: .equal,
-                toItem: view,
-                attribute: .top,
-                multiplier: 1,
-                constant: 150
-            ),
-            NSLayoutConstraint(
-                item: titleVeiw,
-                attribute: .centerX,
-                relatedBy: .equal,
-                toItem: view,
-                attribute: .centerX,
-                multiplier: 1,
-                constant: 0
-            )
-        ])
+        titleVeiw.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        titleVeiw.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        titleVeiw.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
     }
 
     private func setupMainTextView() {
         view.addSubview(mainTextView)
         mainTextView.translatesAutoresizingMaskIntoConstraints = false
-        mainTextView.isUserInteractionEnabled = true
-        mainTextView.text = "Текст Заметки"
+        mainTextView.text = ""
         mainTextView.font = .systemFont(ofSize: 14)
+        mainTextView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20
+        ).isActive = true
+        mainTextView.leftAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.leftAnchor,
+            constant: 20
+        ).isActive = true
+        mainTextView.rightAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.rightAnchor,
+            constant: -20
+        ).isActive = true
+        titleVeiw.bottomAnchor.constraint(
+            equalTo: mainTextView.topAnchor,
+            constant: -15
+        ).isActive = true
     }
 }
