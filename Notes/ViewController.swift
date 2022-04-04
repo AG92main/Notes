@@ -13,13 +13,14 @@ class ViewController: UIViewController {
     private var mainTextView = UITextView()
     private var dateFild = UITextField()
     private var datePicker = UIDatePicker()
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupRightBarButton()
         setupTitleView()
         setupMainTextView()
         setupDataPicker()
+        setupFildDate()
         mainTextView.becomeFirstResponder()
     }
     private func setupRightBarButton() {
@@ -77,7 +78,7 @@ class ViewController: UIViewController {
         ).isActive = true
         let localeID = Locale.preferredLanguages.first
         datePicker.locale = Locale(identifier: localeID!)
-        let toolbar = UIToolbar()
+            let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButtom = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -86,7 +87,6 @@ class ViewController: UIViewController {
             animated: true
         )
         dateFild.inputAccessoryView = toolbar
-        dateFild.placeholder = "Дата"
     }
 
     @objc func doneAction() {
@@ -97,5 +97,14 @@ class ViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MMMM.yyyy"
         dateFild.text = formatter.string(from: datePicker.date)
+    }
+    private func setupFildDate() {
+        let time = NSDate()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MMMM.yyyy"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let formatteddate = formatter.string(from: time as Date)
+        dateFild.text = "\(formatteddate)z"
+        dateFild.accessibilityLanguage = "
     }
 }
