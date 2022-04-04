@@ -62,6 +62,8 @@ class ViewController: UIViewController {
         view.addSubview(dateFild)
         dateFild.inputView = datePicker
         datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
         dateFild.translatesAutoresizingMaskIntoConstraints = false
         dateFild.bottomAnchor.constraint(equalTo: mainTextView.topAnchor, constant: -15).isActive = true
         titleVeiw.bottomAnchor.constraint(equalTo: dateFild.topAnchor, constant: -15).isActive = true
@@ -84,6 +86,7 @@ class ViewController: UIViewController {
             animated: true
         )
         dateFild.inputAccessoryView = toolbar
+        dateFild.placeholder = "Дата"
     }
 
     @objc func doneAction() {
