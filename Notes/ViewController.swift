@@ -76,9 +76,7 @@ class ViewController: UIViewController {
             equalTo: view.safeAreaLayoutGuide.rightAnchor,
             constant: -20
         ).isActive = true
-        let localeID = Locale.preferredLanguages.first
-        datePicker.locale = Locale(identifier: localeID!)
-            let toolbar = UIToolbar()
+        let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButtom = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -104,7 +102,6 @@ class ViewController: UIViewController {
         formatter.dateFormat = "dd.MMMM.yyyy"
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         let formatteddate = formatter.string(from: time as Date)
-        dateFild.text = "\(formatteddate)z"
-        dateFild.accessibilityLanguage = "
+        dateFild.text = "\(formatteddate)"
     }
 }
