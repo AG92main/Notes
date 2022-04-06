@@ -26,8 +26,13 @@ class ViewController: UIViewController {
     private func setupRightBarButton() {
         rightBarButton.title = "Готово"
         rightBarButton.target = self
+        rightBarButton.action = #selector(buttonTap)
         navigationItem.rightBarButtonItem = rightBarButton
         view.endEditing(true)
+    }
+    @objc func buttonTap(_ sender: UIButton) {
+        titleVeiw.resignFirstResponder()
+        mainTextView.resignFirstResponder()
     }
 
     private func setupTitleView() {
