@@ -7,7 +7,14 @@
 
 import UIKit
 
+struct KeysDefalts {
+    static let keyMainTextView = "mainTextViewText"
+    static let keyTitleView = "titleViewText"
+}
+
 class ViewController: UIViewController {
+    let defaults = UserDefaults.standard
+
     private var rightBarButton = UIBarButtonItem()
     private var titleVeiw = UITextField()
     private var mainTextView = UITextView()
@@ -15,6 +22,9 @@ class ViewController: UIViewController {
     private var datePicker = UIDatePicker()
         override func viewDidLoad() {
         super.viewDidLoad()
+
+        titleVeiw.text = defaults.string(forKey: KeysDefalts.keyTitleView)
+        mainTextView.text = defaults.string(forKey: KeysDefalts.keyMainTextView)
         view.backgroundColor = .systemBackground
         setupRightBarButton()
         setupTitleView()
@@ -23,6 +33,7 @@ class ViewController: UIViewController {
         setupFildDate()
         mainTextView.becomeFirstResponder()
     }
+
     private func setupRightBarButton() {
         rightBarButton.title = "Готово"
         rightBarButton.target = self
@@ -30,15 +41,31 @@ class ViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
         view.endEditing(true)
     }
-    @objc func buttonTap(_ sender: UIButton) {
+
+    private func showAlert() {
+        let alertController = UIAlertController(title: "Ошибка", message: "Введите Заголовок", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    @objc func buttonTap(_ sender: Any) {
+        let titleViewText = titleVeiw.text!
         titleVeiw.resignFirstResponder()
         mainTextView.resignFirstResponder()
+        let mainTextViewText = mainTextView.text!
+
+        if !titleViewText.isEmpty && !mainTextViewText.isEmpty {
+            defaults.set(titleViewText, forKey: KeysDefalts.keyTitleView)
+            defaults.set(mainTextViewText, forKey: KeysDefalts.keyMainTextView)
+        } else {
+            showAlert()
+        }
     }
 
     private func setupTitleView() {
         view.addSubview(titleVeiw)
         titleVeiw.translatesAutoresizingMaskIntoConstraints = false
-        titleVeiw.text = ""
         titleVeiw.placeholder = "Заголовок"
         titleVeiw.borderStyle = .none
         titleVeiw.font = .boldSystemFont(ofSize: 22)
@@ -50,7 +77,6 @@ class ViewController: UIViewController {
     private func setupMainTextView() {
         view.addSubview(mainTextView)
         mainTextView.translatesAutoresizingMaskIntoConstraints = false
-        mainTextView.text = ""
         mainTextView.font = .systemFont(ofSize: 14)
         mainTextView.bottomAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20
@@ -64,6 +90,7 @@ class ViewController: UIViewController {
             constant: -20
         ).isActive = true
     }
+
     private func setupDataPicker() {
         view.addSubview(dateFild)
         dateFild.inputView = datePicker
@@ -96,11 +123,13 @@ class ViewController: UIViewController {
         setupGetDatePicker()
         view.endEditing(true)
     }
+
     private func setupGetDatePicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MMMM.yyyy"
         dateFild.text = formatter.string(from: datePicker.date)
     }
+
     private func setupFildDate() {
         let time = NSDate()
         let formatter = DateFormatter()
