@@ -14,7 +14,7 @@ struct KeysDefalts {
 
 class ViewController: UIViewController {
     let defaults = UserDefaults.standard
-
+    let formatter = DateFormatter()
     private var rightBarButton = UIBarButtonItem()
     private var titleVeiw = UITextField()
     private var mainTextView = UITextView()
@@ -23,23 +23,24 @@ class ViewController: UIViewController {
         override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleVeiw.text = defaults.string(forKey: KeysDefalts.keyTitleView)
-        mainTextView.text = defaults.string(forKey: KeysDefalts.keyMainTextView)
         view.backgroundColor = .systemBackground
         setupRightBarButton()
         setupTitleView()
         setupMainTextView()
+        setupTextForView()
         setupDataPicker()
         setupFildDate()
         mainTextView.becomeFirstResponder()
     }
-
+    private func setupTextForView() {
+        titleVeiw.text = defaults.string(forKey: KeysDefalts.keyTitleView)
+        mainTextView.text = defaults.string(forKey: KeysDefalts.keyMainTextView)
+    }
     private func setupRightBarButton() {
         rightBarButton.title = "Готово"
         rightBarButton.target = self
         rightBarButton.action = #selector(buttonTap)
         navigationItem.rightBarButtonItem = rightBarButton
-        view.endEditing(true)
     }
 
     private func showAlert() {
@@ -53,8 +54,10 @@ class ViewController: UIViewController {
         let titleViewText = titleVeiw.text!
         titleVeiw.resignFirstResponder()
         mainTextView.resignFirstResponder()
-        let mainTextViewText = mainTextView.text!
-
+        guard let mainTextViewText = mainTextView.text else {
+            print("mainTextViewText - nil")
+            return
+        }
         if !titleViewText.isEmpty && !mainTextViewText.isEmpty {
             defaults.set(titleViewText, forKey: KeysDefalts.keyTitleView)
             defaults.set(mainTextViewText, forKey: KeysDefalts.keyMainTextView)
@@ -125,14 +128,11 @@ class ViewController: UIViewController {
     }
 
     private func setupGetDatePicker() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MMMM.yyyy"
         dateFild.text = formatter.string(from: datePicker.date)
     }
 
     private func setupFildDate() {
         let time = NSDate()
-        let formatter = DateFormatter()
         formatter.dateFormat = "dd.MMMM.yyyy"
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         let formatteddate = formatter.string(from: time as Date)
