@@ -133,9 +133,9 @@ class ViewController: UIViewController {
 
     private func setupFildDate() {
         let time = NSDate()
-        formatter.dateFormat = "dd.MMMM.yyyy"
+        formatter.dateFormat = "dd MMMM yyyy"
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         let formatteddate = formatter.string(from: time as Date)
-        dateFild.text = "\(formatteddate)"
+        dateFild.placeholder = "\(formatteddate)"
     }
 }
