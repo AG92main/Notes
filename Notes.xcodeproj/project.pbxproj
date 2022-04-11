@@ -12,6 +12,7 @@
 		D029D03727F724B800BAC03F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D029D03627F724B800BAC03F /* ViewController.swift */; };
 		D029D03C27F724BA00BAC03F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D029D03B27F724BA00BAC03F /* Assets.xcassets */; };
 		D029D03F27F724BA00BAC03F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D029D03D27F724BA00BAC03F /* LaunchScreen.storyboard */; };
+		D0947BAB2804A5840048D94A /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0947BAA2804A5840048D94A /* NoteModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D029D03B27F724BA00BAC03F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D029D03E27F724BA00BAC03F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D029D04027F724BA00BAC03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0947BAA2804A5840048D94A /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				D029D03227F724B800BAC03F /* AppDelegate.swift */,
 				D029D03427F724B800BAC03F /* SceneDelegate.swift */,
 				D029D03627F724B800BAC03F /* ViewController.swift */,
+				D0947BAA2804A5840048D94A /* NoteModel.swift */,
 				D029D03B27F724BA00BAC03F /* Assets.xcassets */,
 				D029D03D27F724BA00BAC03F /* LaunchScreen.storyboard */,
 				D029D04027F724BA00BAC03F /* Info.plist */,
@@ -158,6 +161,7 @@
 				D029D03727F724B800BAC03F /* ViewController.swift in Sources */,
 				D029D03327F724B800BAC03F /* AppDelegate.swift in Sources */,
 				D029D03527F724B800BAC03F /* SceneDelegate.swift in Sources */,
+				D0947BAB2804A5840048D94A /* NoteModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,13 @@ struct KeysDefalts {
     static let keyTitleView = "titleViewText"
 }
 
+let model = NoteModel(
+    title: "Заголовок",
+    text: "Текст Заметки"
+)
+
+let screen = ViewController()
+
 class ViewController: UIViewController {
     let defaults = UserDefaults.standard
     let formatter = DateFormatter()
@@ -20,22 +27,38 @@ class ViewController: UIViewController {
     private var mainTextView = UITextView()
     private var dateFild = UITextField()
     private var datePicker = UIDatePicker()
+    var model: NoteModel? {
+        didSet {
+            print(model as Any)
+        }
+    }
+
         override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
         setupRightBarButton()
         setupTitleView()
         setupMainTextView()
-        setupTextForView()
+        saveNotes()
         setupDataPicker()
         setupFildDate()
         mainTextView.becomeFirstResponder()
     }
-    private func setupTextForView() {
-        titleVeiw.text = defaults.string(forKey: KeysDefalts.keyTitleView)
-        mainTextView.text = defaults.string(forKey: KeysDefalts.keyMainTextView)
+
+    func configureElements(with model: NoteModel) {
+        titleVeiw.text = model.title
+        dateFild.text = model.subtitle
+        mainTextView.text = model.text
     }
+
+    @objc
+    private func saveNotes() {
+        model = NoteModel(
+            title: titleVeiw.text,
+            text: mainTextView.text
+        )
+    }
+
     private func setupRightBarButton() {
         rightBarButton.title = "Готово"
         rightBarButton.target = self
@@ -59,8 +82,8 @@ class ViewController: UIViewController {
             return
         }
         if !titleViewText.isEmpty && !mainTextViewText.isEmpty {
-            defaults.set(titleViewText, forKey: KeysDefalts.keyTitleView)
-            defaults.set(mainTextViewText, forKey: KeysDefalts.keyMainTextView)
+            // defaults.set(titleViewText, forKey: KeysDefalts.keyTitleView)
+            // defaults.set(mainTextViewText, forKey: KeysDefalts.keyMainTextView)
         } else {
             showAlert()
         }

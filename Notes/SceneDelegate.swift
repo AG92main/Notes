@@ -18,6 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let myWindow = UIWindow(windowScene: windowScene)
             let navContr = UINavigationController()
             let mViewController = ViewController()
+            let model = NoteModel(
+                title: "Заголовок",
+                subtitle: "",
+                text: "Текст Заметки"
+            )
+            mViewController.configureElements(with: model)
             navContr.viewControllers = [mViewController]
             myWindow.rootViewController = navContr
             self.window = myWindow
