@@ -7,19 +7,11 @@
 
 import UIKit
 
-struct KeysDefalts {
-    static let keyMainTextView = "mainTextViewText"
-    static let keyTitleView = "titleViewText"
-}
-
-let model = NoteModel(
-    title: "Заголовок",
-    text: "Текст Заметки"
-)
-
-let screen = ViewController()
-
-class ViewController: UIViewController {
+class NoteViewController: UIViewController {
+    struct KeysDefalts {
+        static let keyMainTextView = "mainTextViewText"
+        static let keyTitleView = "titleViewText"
+    }
     let defaults = UserDefaults.standard
     let formatter = DateFormatter()
     private var rightBarButton = UIBarButtonItem()
@@ -39,7 +31,6 @@ class ViewController: UIViewController {
         setupRightBarButton()
         setupTitleView()
         setupMainTextView()
-        saveNotes()
         setupDataPicker()
         setupFildDate()
         mainTextView.becomeFirstResponder()
@@ -47,7 +38,7 @@ class ViewController: UIViewController {
 
     func configureElements(with model: NoteModel) {
         titleVeiw.text = model.title
-        dateFild.text = model.subtitle
+        dateFild.text = model.date
         mainTextView.text = model.text
     }
 
@@ -82,8 +73,7 @@ class ViewController: UIViewController {
             return
         }
         if !titleViewText.isEmpty && !mainTextViewText.isEmpty {
-            // defaults.set(titleViewText, forKey: KeysDefalts.keyTitleView)
-            // defaults.set(mainTextViewText, forKey: KeysDefalts.keyMainTextView)
+            saveNotes()
         } else {
             showAlert()
         }

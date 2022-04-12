@@ -17,10 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let myWindow = UIWindow(windowScene: windowScene)
             let navContr = UINavigationController()
-            let mViewController = ViewController()
+            let mViewController = NoteViewController()
             let model = NoteModel(
                 title: "Заголовок",
-                subtitle: "",
+                date: "",
                 text: "Текст Заметки"
             )
             mViewController.configureElements(with: model)
