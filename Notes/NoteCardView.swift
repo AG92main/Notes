@@ -43,29 +43,29 @@ final class NoteCardView: UIView {
         cardView.backgroundColor = .white
         cardView.layer.cornerRadius = 14
 
-        let stacView = UIStackView().prepareForAutoLayout()
-        cardView.addSubview(stacView)
-        stacView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10).isActive = true
-        stacView.leftAnchor.constraint(equalTo: cardView.leftAnchor, constant: 16).isActive = true
-        stacView.rightAnchor.constraint(equalTo: cardView.rightAnchor, constant: -16).isActive = true
-        stacView.axis = .vertical
-        stacView.spacing = 4
-        stacView.addArrangedSubview(titleView)
-        stacView.addArrangedSubview(subtitleView)
+        let stackView = UIStackView().prepareForAutoLayout()
+        cardView.addSubview(stackView)
+        stackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10).isActive = true
+        stackView.leftAnchor.constraint(equalTo: cardView.leftAnchor, constant: 16).isActive = true
+        stackView.rightAnchor.constraint(equalTo: cardView.rightAnchor, constant: -16).isActive = true
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        stackView.addArrangedSubview(titleView)
+        stackView.addArrangedSubview(subtitleView)
 
         cardView.addSubview(dateView)
         dateView.leftAnchor.constraint(equalTo: cardView.leftAnchor, constant: 16).isActive = true
         dateView.rightAnchor.constraint(equalTo: cardView.rightAnchor, constant: -16).isActive = true
         dateView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10 ).isActive = true
 
-        stacView.bottomAnchor.constraint(equalTo: dateView.topAnchor, constant: -24).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: dateView.topAnchor, constant: -24).isActive = true
     }
 
     private func setupStyles() {
-        titleView.font = .systemFont(ofSize: 16, weight: .medium)
-        subtitleView.font = .systemFont(ofSize: 10, weight: .medium)
+        titleView.font = UIFont(name: "SFProText-Medium", size: 16)
+        subtitleView.font = UIFont(name: "SFProText-Medium", size: 10)
         subtitleView.textColor = .systemGray2
-        dateView.font = .systemFont(ofSize: 10, weight: .medium)
+        dateView.font = UIFont(name: "SFProText-Medium", size: 10)
     }
 
     private func addRecognaizer() {

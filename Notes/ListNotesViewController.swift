@@ -11,12 +11,24 @@ import UIKit
 final class ListNotesViewController: UIViewController {
     private let scrollView = UIScrollView().prepareForAutoLayout()
     private let stackView = UIStackView().prepareForAutoLayout()
-
+    private let addNoteButton = UIButton().prepareForAutoLayout()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
 
         setupUI()
+        setupAddBotton()
+    }
+    private func setupAddBotton() {
+        let imageBottom = UIImage(named: "button")
+        addNoteButton.setImage(imageBottom, for: UIControl.State.normal)
+       // addNoteButton.layer.cornerRadius = 25
+       // addNoteButton.clipsToBounds = true
+       // addNoteButton.contentVerticalAlignment = .bottom
+       // addNoteButton.setTitle("+", for: .normal)
+       // addNoteButton.titleLabel?.font = UIFont.systemFont(ofSize: 36, weight: .regular)
+       // addNoteButton.backgroundColor = UIColor(red: 0, green: 0.478, blue: 1, alpha: 1)
+        addNoteButton.addTarget(self, action: #selector(tapAddNoteButton), for: .touchUpInside)
     }
     private func setupUI() {
         navigationItem.title = "Заметки"
@@ -30,12 +42,24 @@ final class ListNotesViewController: UIViewController {
         scrollView.alwaysBounceVertical = true
 
         scrollView.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor).isActive = true
-        stackView.leftAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leftAnchor).isActive = true
-        stackView.rightAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.rightAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        stackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+        stackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         stackView.axis = .vertical
+
+        view.addSubview(addNoteButton)
+        addNoteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 734).isActive = true
+        addNoteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 321).isActive = true
+        addNoteButton.rightAnchor.constraint(
+            equalTo: view.rightAnchor,
+            constant: -19
+        ).isActive = true
+        addNoteButton.bottomAnchor.constraint(
+            equalTo: view.bottomAnchor,
+            constant: -60
+        ).isActive = true
 
         let model = NoteModel(
             title: "Заметка",
@@ -52,5 +76,8 @@ final class ListNotesViewController: UIViewController {
             }
         stackView.addArrangedSubview(card)
         }
+    }
+    @objc func tapAddNoteButton(_ sender: Any) {
+        print("Button tapped")
     }
 }
