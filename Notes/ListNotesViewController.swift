@@ -11,7 +11,7 @@ import UIKit
 final class ListNotesViewController: UIViewController {
     private let scrollView = UIScrollView().prepareForAutoLayout()
     private let stackView = UIStackView().prepareForAutoLayout()
-    private let addNoteButton = UIButton().prepareForAutoLayout()
+    private let addNoteButton = UIButton(type: .custom).prepareForAutoLayout()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
@@ -20,15 +20,13 @@ final class ListNotesViewController: UIViewController {
         setupAddBotton()
     }
     private func setupAddBotton() {
-        let imageBottom = UIImage(named: "button")
-        addNoteButton.setImage(imageBottom, for: UIControl.State.normal)
-       // addNoteButton.layer.cornerRadius = 25
-       // addNoteButton.clipsToBounds = true
-       // addNoteButton.contentVerticalAlignment = .bottom
-       // addNoteButton.setTitle("+", for: .normal)
-       // addNoteButton.titleLabel?.font = UIFont.systemFont(ofSize: 36, weight: .regular)
-       // addNoteButton.backgroundColor = UIColor(red: 0, green: 0.478, blue: 1, alpha: 1)
-        addNoteButton.addTarget(self, action: #selector(tapAddNoteButton), for: .touchUpInside)
+         addNoteButton.layer.cornerRadius = 35
+         addNoteButton.clipsToBounds = true
+         addNoteButton.contentVerticalAlignment = .bottom
+         addNoteButton.setTitle("+", for: .normal)
+        addNoteButton.titleLabel?.font = UIFont.systemFont(ofSize: 50, weight: .regular)
+         addNoteButton.backgroundColor = UIColor(red: 0, green: 0.478, blue: 1, alpha: 1)
+         addNoteButton.addTarget(self, action: #selector(tapAddNoteButton), for: .touchUpInside)
     }
     private func setupUI() {
         navigationItem.title = "Заметки"
@@ -50,11 +48,11 @@ final class ListNotesViewController: UIViewController {
         stackView.axis = .vertical
 
         view.addSubview(addNoteButton)
-        addNoteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 734).isActive = true
-        addNoteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 321).isActive = true
+        addNoteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 760).isActive = true
+        addNoteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 320).isActive = true
         addNoteButton.rightAnchor.constraint(
             equalTo: view.rightAnchor,
-            constant: -19
+            constant: -20
         ).isActive = true
         addNoteButton.bottomAnchor.constraint(
             equalTo: view.bottomAnchor,
@@ -63,7 +61,7 @@ final class ListNotesViewController: UIViewController {
 
         let model = NoteModel(
             title: "Заметка",
-            date: Date().description,
+            date: Date(),
             text: "Текст Заметки"
         )
         for _ in 1...7 {

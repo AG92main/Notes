@@ -37,7 +37,7 @@ final class NoteViewController: UIViewController {
 
     func configureElements(with model: NoteModel) {
         titleVeiw.text = model.title
-        dateFild.text = model.date
+        dateFild.text = model.date?.description
         mainTextView.text = model.text
     }
 
