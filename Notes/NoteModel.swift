@@ -9,6 +9,6 @@ import Foundation
 
 struct NoteModel {
     var title: String?
-    var date: Date?
+    var date: Date
     var text: String?
 }

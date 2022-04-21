@@ -13,7 +13,11 @@ final class NoteCardView: UIView {
     private let titleView = UILabel().prepareForAutoLayout()
     private let subtitleView = UILabel().prepareForAutoLayout()
     private let dateView = UILabel().prepareForAutoLayout()
-    private let formatter = DateFormatter()
+    private let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        return formatter
+    }()
 
     var callback: ((NoteModel) -> Void)?
 
@@ -22,7 +26,7 @@ final class NoteCardView: UIView {
             guard let model = model else { return }
             titleView.text = model.title
             subtitleView.text = model.text
-            dateView.text = model.date?.description
+            dateView.text = formatter.string(from: model.date)
         }
     }
     init() {
@@ -67,10 +71,6 @@ final class NoteCardView: UIView {
         subtitleView.font = UIFont(name: "SFProText-Medium", size: 10)
         subtitleView.textColor = .systemGray2
         dateView.font = UIFont(name: "SFProText-Medium", size: 10)
-        let time = NSDate()
-        formatter.dateFormat = "dd.mm.yyyy"
-        let formatteddate = formatter.string(from: time as Date)
-        dateView.text = "\(formatteddate)"
     }
 
     private func addRecognaizer() {

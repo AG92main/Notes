@@ -20,13 +20,9 @@ final class ListNotesViewController: UIViewController {
         setupAddBotton()
     }
     private func setupAddBotton() {
-         addNoteButton.layer.cornerRadius = 35
-         addNoteButton.clipsToBounds = true
-         addNoteButton.contentVerticalAlignment = .bottom
-         addNoteButton.setTitle("+", for: .normal)
-        addNoteButton.titleLabel?.font = UIFont.systemFont(ofSize: 50, weight: .regular)
-         addNoteButton.backgroundColor = UIColor(red: 0, green: 0.478, blue: 1, alpha: 1)
-         addNoteButton.addTarget(self, action: #selector(tapAddNoteButton), for: .touchUpInside)
+        let image = UIImage(named: "button")
+        addNoteButton.setImage(image, for: .normal)
+        addNoteButton.addTarget(self, action: #selector(tapAddNoteButton), for: .touchUpInside)
     }
     private func setupUI() {
         navigationItem.title = "Заметки"
@@ -48,8 +44,6 @@ final class ListNotesViewController: UIViewController {
         stackView.axis = .vertical
 
         view.addSubview(addNoteButton)
-        addNoteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 760).isActive = true
-        addNoteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 320).isActive = true
         addNoteButton.rightAnchor.constraint(
             equalTo: view.rightAnchor,
             constant: -20
@@ -58,6 +52,8 @@ final class ListNotesViewController: UIViewController {
             equalTo: view.bottomAnchor,
             constant: -60
         ).isActive = true
+        addNoteButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        addNoteButton.heightAnchor.constraint(equalTo: addNoteButton.widthAnchor).isActive = true
 
         let model = NoteModel(
             title: "Заметка",
@@ -65,17 +61,20 @@ final class ListNotesViewController: UIViewController {
             text: "Текст Заметки"
         )
         for _ in 1...7 {
-        let card = NoteCardView()
-        card.model = model
+            let card = NoteCardView()
+            card.model = model
             card.callback = { [weak self] model in
                 let noteViewController = NoteViewController()
                 noteViewController.configureElements(with: model)
                 self?.navigationController?.pushViewController(noteViewController, animated: true)
             }
-        stackView.addArrangedSubview(card)
+            stackView.addArrangedSubview(card)
         }
     }
     @objc func tapAddNoteButton(_ sender: Any) {
-        print("Button tapped")
+        let model = NoteModel(title: "", date: Date(), text: "")
+        let noteViewController = NoteViewController()
+        noteViewController.configureElements(with: model)
+        navigationController?.pushViewController(noteViewController, animated: true)
     }
 }

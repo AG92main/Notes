@@ -13,11 +13,16 @@ final class NoteViewController: UIViewController {
         static let keyTitleView = "titleViewText"
     }
     let defaults = UserDefaults.standard
-    let formatter = DateFormatter()
     private var rightBarButton = UIBarButtonItem()
     private var titleVeiw = UITextField().prepareForAutoLayout()
     private var mainTextView = UITextView().prepareForAutoLayout()
     private var dateFild = UILabel().prepareForAutoLayout()
+    private let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy eeee HH:mm"
+        return formatter
+    }()
+
     var model: NoteModel? {
         didSet {
             print(model as Any)
@@ -37,7 +42,7 @@ final class NoteViewController: UIViewController {
 
     func configureElements(with model: NoteModel) {
         titleVeiw.text = model.title
-        dateFild.text = model.date?.description
+        dateFild.text = formatter.string(from: model.date)
         mainTextView.text = model.text
     }
 
@@ -45,6 +50,7 @@ final class NoteViewController: UIViewController {
     private func saveNotes() {
         model = NoteModel(
             title: titleVeiw.text,
+            date: Date(),
             text: mainTextView.text
         )
     }
@@ -79,14 +85,9 @@ final class NoteViewController: UIViewController {
         }
     }
     private func setupFildDate() {
-        let time = NSDate()
         view.addSubview(dateFild)
         dateFild.textColor = UIColor(red: 0.675, green: 0.675, blue: 0.675, alpha: 1)
-        formatter.dateFormat = "dd.mm.yyyy eeee HH:mm "
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFild.textAlignment = .center
-        let formatteddate = formatter.string(from: time as Date)
-        dateFild.text = "\(formatteddate)"
     }
 
     private func setupTitleView() {
