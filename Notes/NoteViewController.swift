@@ -7,18 +7,22 @@
 
 import UIKit
 
-class NoteViewController: UIViewController {
+final class NoteViewController: UIViewController {
     struct KeysDefalts {
         static let keyMainTextView = "mainTextViewText"
         static let keyTitleView = "titleViewText"
     }
     let defaults = UserDefaults.standard
-    let formatter = DateFormatter()
     private var rightBarButton = UIBarButtonItem()
-    private var titleVeiw = UITextField()
-    private var mainTextView = UITextView()
-    private var dateFild = UITextField()
-    private var datePicker = UIDatePicker()
+    private var titleVeiw = UITextField().prepareForAutoLayout()
+    private var mainTextView = UITextView().prepareForAutoLayout()
+    private var dateFild = UILabel().prepareForAutoLayout()
+    private let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy eeee HH:mm"
+        return formatter
+    }()
+
     var model: NoteModel? {
         didSet {
             print(model as Any)
@@ -27,18 +31,18 @@ class NoteViewController: UIViewController {
 
         override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+            view.backgroundColor = .white
         setupRightBarButton()
+        setupFildDate()
         setupTitleView()
         setupMainTextView()
-        setupDataPicker()
-        setupFildDate()
+        setupConstrains()
         mainTextView.becomeFirstResponder()
     }
 
     func configureElements(with model: NoteModel) {
         titleVeiw.text = model.title
-        dateFild.text = model.date
+        dateFild.text = formatter.string(from: model.date)
         mainTextView.text = model.text
     }
 
@@ -46,12 +50,14 @@ class NoteViewController: UIViewController {
     private func saveNotes() {
         model = NoteModel(
             title: titleVeiw.text,
+            date: Date(),
             text: mainTextView.text
         )
     }
 
     private func setupRightBarButton() {
         rightBarButton.title = "Готово"
+        rightBarButton.style = .done
         rightBarButton.target = self
         rightBarButton.action = #selector(buttonTap)
         navigationItem.rightBarButtonItem = rightBarButton
@@ -78,22 +84,32 @@ class NoteViewController: UIViewController {
             showAlert()
         }
     }
+    private func setupFildDate() {
+        view.addSubview(dateFild)
+        dateFild.textColor = UIColor(red: 0.675, green: 0.675, blue: 0.675, alpha: 1)
+        dateFild.textAlignment = .center
+    }
 
     private func setupTitleView() {
         view.addSubview(titleVeiw)
-        titleVeiw.translatesAutoresizingMaskIntoConstraints = false
-        titleVeiw.placeholder = "Заголовок"
+        titleVeiw.placeholder = "Введите Заголовок"
         titleVeiw.borderStyle = .none
-        titleVeiw.font = .boldSystemFont(ofSize: 22)
-        titleVeiw.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        titleVeiw.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        titleVeiw.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        titleVeiw.font = UIFont(name: "SFProText-Medium", size: 24)
     }
 
     private func setupMainTextView() {
         view.addSubview(mainTextView)
-        mainTextView.translatesAutoresizingMaskIntoConstraints = false
-        mainTextView.font = .systemFont(ofSize: 14)
+        mainTextView.font = UIFont(name: "SFProText-Regular", size: 16)
+    }
+
+    private func setupConstrains() {
+        dateFild.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12).isActive = true
+        dateFild.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        dateFild.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+
+        titleVeiw.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        titleVeiw.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+
         mainTextView.bottomAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20
         ).isActive = true
@@ -105,50 +121,8 @@ class NoteViewController: UIViewController {
             equalTo: view.safeAreaLayoutGuide.rightAnchor,
             constant: -20
         ).isActive = true
-    }
 
-    private func setupDataPicker() {
-        view.addSubview(dateFild)
-        dateFild.inputView = datePicker
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-        dateFild.translatesAutoresizingMaskIntoConstraints = false
-        dateFild.bottomAnchor.constraint(equalTo: mainTextView.topAnchor, constant: -15).isActive = true
-        titleVeiw.bottomAnchor.constraint(equalTo: dateFild.topAnchor, constant: -15).isActive = true
-        dateFild.leftAnchor.constraint(
-            equalTo: view.safeAreaLayoutGuide.leftAnchor,
-            constant: 20
-        ).isActive = true
-        dateFild.rightAnchor.constraint(
-            equalTo: view.safeAreaLayoutGuide.rightAnchor,
-            constant: -20
-        ).isActive = true
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButtom = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolbar.setItems(
-            [flexSpace, doneButtom],
-            animated: true
-        )
-        dateFild.inputAccessoryView = toolbar
-    }
-
-    @objc func doneAction() {
-        setupGetDatePicker()
-        view.endEditing(true)
-    }
-
-    private func setupGetDatePicker() {
-        dateFild.text = formatter.string(from: datePicker.date)
-    }
-
-    private func setupFildDate() {
-        let time = NSDate()
-        formatter.dateFormat = "dd MMMM yyyy"
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        let formatteddate = formatter.string(from: time as Date)
-        dateFild.placeholder = "\(formatteddate)"
+        titleVeiw.bottomAnchor.constraint(equalTo: mainTextView.topAnchor, constant: -16).isActive = true
+        dateFild.bottomAnchor.constraint(equalTo: titleVeiw.topAnchor, constant: -12).isActive = true
     }
 }

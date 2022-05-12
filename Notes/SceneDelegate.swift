@@ -14,21 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        if let windowScene = scene as? UIWindowScene {
-            let myWindow = UIWindow(windowScene: windowScene)
-            let navContr = UINavigationController()
-            let mViewController = NoteViewController()
-            let model = NoteModel(
-                title: "Заголовок",
-                date: "",
-                text: "Текст Заметки"
-            )
-            mViewController.configureElements(with: model)
-            navContr.viewControllers = [mViewController]
-            myWindow.rootViewController = navContr
-            self.window = myWindow
-            myWindow.makeKeyAndVisible()
-        }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+        let viewController = ListNotesViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
         }
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
